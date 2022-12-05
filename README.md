@@ -11,7 +11,6 @@ Difference between Amazon Pinpoint Push Notifications and Amazon Simple Notifica
 * Review supported countries (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html) and check if your targeted country require senderID registration (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html) / need to purchase long code (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-long-code.html) (e.g. Philippines require support ticket to purchase long code / senderid registration), then you need to create support ticket one by one. Or the team can let us know the targeted countries so we can explain the next step
 
 
-
 *Whether using SNS or Pinpoint?*
 
 * SNS and Pinpoint has the same SMS delivery infrastructure, so the templated message is appliable for both services
@@ -43,6 +42,33 @@ Difference between Amazon Pinpoint Push Notifications and Amazon Simple Notifica
 *Technical - SMS Traffic Performance*
 
 * The traffic speed sent to China should be similar to other countries after template registration, I would suggest the team to have a test though below API setting and submit developer support ticket for further investigation if needed
+
+*Technical - API Endpoint Quick Test Pinpoint*
+
+* Follow this (https://docs.aws.amazon.com/pinpoint/latest/developerguide/tutorials-using-postman.html) tutorial (10 mins) to install Pinpoint in your postman account 
+* Change the Body (Below are the example) & Pre-request script with suitable parameter
+* Change endpoint / region etc. to the region suitable for the team (should be ap-southeast-1 if you’re using Singapore region)
+
+```
+{
+    "MessageConfiguration": {
+        "DefaultMessage": {
+            "Body": "[Amazon] Hello King Lai, received your payment ($1958.12), you will receive a confirmation message shortly."
+        },
+        "SMSMessage": {
+            "MessageType": "TRANSACTIONAL",
+            "SenderId": "Amazon"
+        }
+    },
+    "Addresses":{
+        "+852612345678": {
+        "ChannelType": "SMS"
+    }
+ }
+ 
+ ```
+ <img width="676" alt="Screenshot 2022-12-05 at 11 52 46 AM" src="https://user-images.githubusercontent.com/12087625/205539029-fe11b558-84ee-47aa-ac29-4b9930949086.png">
+ <img width="676" alt="Screenshot 2022-12-05 at 11 52 46 AM" src="https://user-images.githubusercontent.com/12087625/205538976-8622b3f6-6394-4df2-9b84-34f57036d875.jpg">
 
 *Additional Reference*
 
